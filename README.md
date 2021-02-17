@@ -1,5 +1,27 @@
 # CPPND: Memory Management Chatbot
 
+## 2021-02-16 Start project
+
+Here is how I got development working on Windows 10 via VSCode via WSL Ubuntu 20:
+
+Windows needs an X server running:
+- Install VcXSrv (x server for windows) : `https://sourceforge.net/projects/vcxsrv/`
+- Check WSL version in PowerShell : `wsl -l -v`
+- vcxsrv should run with access control disabled : `vcxsrv.exe -ac`
+- Allow Windows Firewall access
+
+In the WSL terminal in VSCode:
+- Check current version of wxwidget : `sudo apt-cache search libwxgt*`
+- Install current version of wxwidget : `sudo apt install libwxgtk3.0-gtk3-dev`
+- Add to .bashrc:
+-   `export DISPLAY=$(ip route  | awk '/default via / {print $3; exit}' 2>/dev/null):0 `
+-   `export LIBGL_ALWAYS_INDIRECT=1`
+
+At this point the vanilla project starter code compiled and ran, and successfully output an X window via vcxsrv.
+
+
+## Original Readme follows...
+
 This is the project for the third course in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213): Memory Management.
 
 <img src="images/chatbot_demo.gif"/>
