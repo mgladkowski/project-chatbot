@@ -21,7 +21,10 @@ ChatLogic::ChatLogic() {
     _chatBot->SetChatLogicHandle(this);
 }
 
-ChatLogic::~ChatLogic() {}
+ChatLogic::~ChatLogic() {
+
+    delete _chatBot;
+}
 
 template <typename T>
 void ChatLogic::AddAllTokensToElement(std::string tokenID, tokenlist &tokens, T &element) {
@@ -133,7 +136,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
                             AddAllTokensToElement("KEYWORD", tokens, *edge);
 
                             // store reference in child node and parent node
-                            (*childNode)->AddEdgeToParentNode(edge.get());     // parent gets a non owning reference
+                            (*childNode)->AddEdgeToParentNode(edge.get());      // parent gets a non owning reference
                             (*parentNode)->AddEdgeToChildNode(std::move(edge)); // child gets ownership via move
                         }
                     }
