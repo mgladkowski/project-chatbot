@@ -2,31 +2,29 @@
 #define CHATGUI_H_
 
 #include <wx/wx.h>
+#include <memory>
 
 class ChatLogic; // forward declaration
 
 // middle part of the window containing the dialog between user and chatbot
 class ChatBotPanelDialog : public wxScrolledWindow {
-   private:
+ private:
+
     // control elements
     wxBoxSizer *_dialogSizer;
     wxBitmap _image;
 
-    //// STUDENT CODE
-    ////
+    //ChatLogic *_chatLogic;
+    std::unique_ptr<ChatLogic> _chatLogic;
 
-    ChatLogic *_chatLogic;
+ public:
 
-    ////
-    //// EOF STUDENT CODE
-
-   public:
     // constructor / destructor
     ChatBotPanelDialog(wxWindow *parent, wxWindowID id);
     ~ChatBotPanelDialog();
 
     // getter / setter
-    ChatLogic *GetChatLogicHandle() { return _chatLogic; }
+    ChatLogic *GetChatLogicHandle() { return _chatLogic.get(); }
 
     // events
     void paintEvent(wxPaintEvent &evt);
