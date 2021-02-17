@@ -1,8 +1,8 @@
 #ifndef GRAPHNODE_H_
 #define GRAPHNODE_H_
 
-#include <string>
 #include <memory>
+#include <string>
 #include <vector>
 
 #include "chatbot.h"
@@ -12,7 +12,6 @@ class GraphEdge;
 
 class GraphNode {
    private:
-
     // data handles (owned)
     std::vector<std::unique_ptr<GraphEdge>> _childEdges; // edges to subsequent nodes
 

@@ -49,12 +49,15 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
 
     // check for file availability and process it line by line
     if (file) {
+
         // loop over all lines in the file
         std::string lineStr;
         while (getline(file, lineStr)) {
+
             // extract all tokens from current line
             tokenlist tokens;
             while (lineStr.size() > 0) {
+
                 // extract next token
                 int posTokenFront = lineStr.find("<");
                 int posTokenBack  = lineStr.find(">");
