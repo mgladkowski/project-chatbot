@@ -6,6 +6,8 @@ Tasks 0 (intentional bug) through 5 appear complete.
 
 Rule of 5 messages are being output.
 
+I added console output of GraphNode as well to confirm that _nodes was responsible for the local members _chatBot getting cleaned up at the end.
+
 
 ## 2021-02-16 Start project
 
