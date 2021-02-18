@@ -86,10 +86,10 @@ ChatBot::ChatBot(ChatBot &&source) noexcept {
     source._image       = NULL;
 }
 
-// move operator
+// move assignment operator
 ChatBot &ChatBot::operator=(ChatBot &&source) noexcept {
 
-    std::cout << "Debug : ChatBot move operator" << std::endl;
+    std::cout << "ChatBot move assignment operator" << std::endl;
 
     if (this == &source) return *this;
 
@@ -99,6 +99,8 @@ ChatBot &ChatBot::operator=(ChatBot &&source) noexcept {
     _currentNode = source._currentNode;
     _rootNode    = source._rootNode;
 
+    _chatLogic->SetChatbotHandle(this);
+    
     source._image       = NULL;
     source._chatLogic   = nullptr;
     source._currentNode = nullptr;

@@ -12,19 +12,9 @@
 #include "graphedge.h"
 #include "graphnode.h"
 
-ChatLogic::ChatLogic() {
+ChatLogic::ChatLogic() {}
 
-    // create instance of chatbot
-    _chatBot = new ChatBot("../images/chatbot.png");
-
-    // add pointer to chatlogic so that chatbot answers can be passed on to the GUI
-    _chatBot->SetChatLogicHandle(this);
-}
-
-ChatLogic::~ChatLogic() {
-
-    delete _chatBot;
-}
+ChatLogic::~ChatLogic() {}
 
 template <typename T>
 void ChatLogic::AddAllTokensToElement(std::string tokenID, tokenlist &tokens, T &element) {
@@ -101,7 +91,8 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
 
                         // create new element if ID does not yet exist
                         if (newNode == _nodes.end()) {
-                            _nodes.emplace_back(new GraphNode(id));
+
+                            _nodes.emplace_back(std::make_unique<GraphNode>(id));
                             newNode = _nodes.end() - 1; // get iterator to last element
 
                             // add all answers to current node
@@ -132,8 +123,8 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
                             // create new edge
                             // the vector of edge pointers became a unique edge which will be owned by its child node
                             std::unique_ptr<GraphEdge> edge = std::make_unique<GraphEdge>(id);
-                            edge->SetChildNode(childNode->get());
-                            edge->SetParentNode(parentNode->get());
+                            edge->SetChildNode( (*childNode).get()) ;
+                            edge->SetParentNode( (*parentNode).get() );
 
                             // find all keywords for current node
                             AddAllTokensToElement("KEYWORD", tokens, *edge);
@@ -173,8 +164,10 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
     }
 
     // add chatbot to graph root node
-    _chatBot->SetRootNode(rootNode);
-    rootNode->MoveChatbotHere(_chatBot);
+    ChatBot chatBot("../images/chatbot.png"); // on the stack as requested
+    chatBot.SetChatLogicHandle(this);
+    chatBot.SetRootNode(rootNode);
+    rootNode->MoveChatbotHere(std::move(chatBot));
 }
 
 void ChatLogic::SetPanelDialogHandle(ChatBotPanelDialog *panelDialog) {
