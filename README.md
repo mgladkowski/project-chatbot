@@ -1,5 +1,12 @@
 # CPPND: Memory Management Chatbot
 
+## 2021-02-17 First submission
+
+Tasks 0 (intentional bug) through 5 appear complete.
+
+Rule of 5 messages are being output.
+
+
 ## 2021-02-16 Start project
 
 Here is how I got development working on Windows 10 via VSCode via WSL Ubuntu 20:
