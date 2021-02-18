@@ -1,24 +1,31 @@
 #include "graphnode.h"
 
 #include "graphedge.h"
+#include <iostream>
 
 GraphNode::GraphNode(int id) {
     _id = id;
+    std::cout << "GraphNode constructor" << std::endl;
 }
 
-GraphNode::~GraphNode() {}
+GraphNode::~GraphNode() {
+
+    std::cout << "GraphNode destructor" << std::endl;
+}
 
 void GraphNode::AddToken(std::string token) {
     _answers.push_back(token);
 }
 
 void GraphNode::AddEdgeToParentNode(GraphEdge *edge) {
-    // storing in vector the non-owned edges of parent nodes
+
+    // storing in vector the non-owned (raw) edges of parent nodes
     _parentEdges.push_back(edge);
 }
 
 void GraphNode::AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge) {
-    // moving to vector the edges owned by a child
+
+    // moving to vector the edges owned (unique ptr) by a child
     _childEdges.push_back(std::move(edge));
 }
 
@@ -35,6 +42,6 @@ void GraphNode::MoveChatbotToNewNode(GraphNode *newNode) {
 
 GraphEdge *GraphNode::GetChildEdgeAtIndex(int index) {
 
-    // still returning an unowned pointer, just have to get() it from the unique_ptr
+    // still returning a raw pointer, just have to get() it from the unique_ptr
     return _childEdges[index].get();
 }

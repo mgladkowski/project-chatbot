@@ -123,7 +123,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
                             // create new edge
                             // the vector of edge pointers became a unique edge which will be owned by its child node
                             std::unique_ptr<GraphEdge> edge = std::make_unique<GraphEdge>(id);
-                            edge->SetChildNode( (*childNode).get()) ;
+                            edge->SetChildNode( (*childNode).get() ) ;
                             edge->SetParentNode( (*parentNode).get() );
 
                             // find all keywords for current node

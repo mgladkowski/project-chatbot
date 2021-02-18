@@ -14,6 +14,7 @@ class GraphNode;
 
 class ChatLogic {
    private:
+
     // data handles (owned)
     std::vector<std::unique_ptr<GraphNode>> _nodes;
 
@@ -30,6 +31,7 @@ class ChatLogic {
     void AddAllTokensToElement(std::string tokenID, tokenlist &tokens, T &element);
 
    public:
+   
     // constructor / destructor
     ChatLogic();
     ~ChatLogic();
